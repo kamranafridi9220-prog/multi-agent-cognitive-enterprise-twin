@@ -11,6 +11,7 @@ from agents import (
 )
 
 from decision_engine import StrategicDecisionEngine
+from memory_engine import EnterpriseMemoryEngine
 
 st.set_page_config(
     page_title="Cognitive Enterprise Twin",
@@ -84,6 +85,7 @@ if uploaded_file:
         strategy_agent = StrategyAgent()
         ceo_agent = CEODecisionAgent()
         decision_engine = StrategicDecisionEngine()
+        memory_engine = EnterpriseMemoryEngine()
 
         data_output = data_agent.analyse(df, selected_metric)
         revenue_output = revenue_agent.analyse(df, selected_metric)
@@ -102,6 +104,18 @@ if uploaded_file:
         )
 
         decision_classification = decision_engine.classify_decision(decision_score)
+
+        memory_record = memory_engine.create_memory_record(
+            dataset_name=uploaded_file.name,
+            selected_metric=selected_metric,
+            decision_score=decision_score,
+            decision_classification=decision_classification,
+            revenue_view=revenue_output["recommendation"],
+            risk_view=risk_output["risk_assessment"],
+            ceo_decision=ceo_output["executive_summary"]
+        )
+
+        memory_summary = memory_engine.summarize_memory(memory_record)
 
         st.subheader("Strategic Decision Score")
 
@@ -133,6 +147,13 @@ if uploaded_file:
         with st.expander("CEO Decision Agent", expanded=True):
             st.write(ceo_output["final_decision"])
             st.success(ceo_output["executive_summary"])
+
+        st.subheader("Cognitive Enterprise Memory")
+
+        st.info(memory_summary)
+
+        with st.expander("View Memory Record"):
+            st.json(memory_record)
 
         st.subheader("Executive Decision Summary")
 
