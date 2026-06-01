@@ -7,7 +7,8 @@ from agents import (
     RevenueOptimizationAgent,
     RiskOfficerAgent,
     StrategyAgent,
-    CEODecisionAgent
+    CEODecisionAgent,
+    ChiefKnowledgeOfficerAgent
 )
 
 from decision_engine import StrategicDecisionEngine
@@ -23,7 +24,7 @@ st.title("🧠 Cognitive Enterprise Twin")
 st.subheader("A Multi-Agent Decision Intelligence Platform for SMEs")
 
 st.markdown("""
-The Cognitive Enterprise Twin uses multiple executive-style AI agents to analyse SME business data, identify risks, discover revenue opportunities, and generate explainable strategic recommendations.
+The Cognitive Enterprise Twin uses multiple executive-style AI agents to analyse SME business data, identify risks, discover revenue opportunities, store enterprise memory, and generate explainable strategic recommendations.
 """)
 
 st.sidebar.title("CET Control Panel")
@@ -84,6 +85,8 @@ if uploaded_file:
         risk_agent = RiskOfficerAgent()
         strategy_agent = StrategyAgent()
         ceo_agent = CEODecisionAgent()
+        cko_agent = ChiefKnowledgeOfficerAgent()
+
         decision_engine = StrategicDecisionEngine()
         memory_engine = EnterpriseMemoryEngine()
 
@@ -105,6 +108,14 @@ if uploaded_file:
 
         decision_classification = decision_engine.classify_decision(decision_score)
 
+        agent_debate = decision_engine.generate_agent_debate(
+            revenue_output,
+            risk_output,
+            strategy_output
+        )
+
+        debate_summary = decision_engine.generate_debate_summary(agent_debate)
+
         memory_record = memory_engine.create_memory_record(
             dataset_name=uploaded_file.name,
             selected_metric=selected_metric,
@@ -115,7 +126,10 @@ if uploaded_file:
             ceo_decision=ceo_output["executive_summary"]
         )
 
+        updated_memory = memory_engine.add_memory_record(memory_record)
         memory_summary = memory_engine.summarize_memory(memory_record)
+        historical_summary = memory_engine.summarize_historical_memory()
+        cko_output = cko_agent.analyse(updated_memory)
 
         st.subheader("Strategic Decision Score")
 
@@ -148,12 +162,28 @@ if uploaded_file:
             st.write(ceo_output["final_decision"])
             st.success(ceo_output["executive_summary"])
 
+        st.subheader("Strategic Agent Debate")
+
+        st.info(debate_summary)
+
+        for debate_item in agent_debate:
+            with st.expander(debate_item["agent"]):
+                st.write(debate_item["position"])
+
         st.subheader("Cognitive Enterprise Memory")
 
         st.info(memory_summary)
+        st.write(historical_summary)
 
-        with st.expander("View Memory Record"):
+        with st.expander("View Latest Memory Record"):
             st.json(memory_record)
+
+        st.subheader("Chief Knowledge Officer Agent")
+
+        st.success(cko_output["insight"])
+
+        with st.expander("View Full Enterprise Memory"):
+            st.json(updated_memory)
 
         st.subheader("Executive Decision Summary")
 
@@ -172,8 +202,11 @@ if uploaded_file:
         **Risk View:**  
         {risk_output["risk_assessment"]}
 
-        **Strategic View:**  
-        {strategy_output["priority"]}
+        **Strategic Debate Summary:**  
+        {debate_summary}
+
+        **Organizational Learning:**  
+        {cko_output["insight"]}
 
         **CEO Decision:**  
         {ceo_output["executive_summary"]}
