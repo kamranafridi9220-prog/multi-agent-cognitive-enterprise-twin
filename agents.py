@@ -9,7 +9,6 @@ class DataScientistAgent:
 
 class RevenueOptimizationAgent:
     def analyse(self, df, selected_metric):
-        total_value = df[selected_metric].sum()
         average_value = df[selected_metric].mean()
 
         return {
@@ -54,4 +53,40 @@ class CEODecisionAgent:
             "role": "CEO Decision Agent",
             "final_decision": "Proceed with deeper business analysis before making strategic changes.",
             "executive_summary": "The Cognitive Enterprise Twin has identified initial performance patterns, revenue opportunities, and risk signals. The recommended next step is to prioritise high-value areas while monitoring operational and financial risks."
+        }
+
+
+class ChiefKnowledgeOfficerAgent:
+    def analyse(self, memory_data):
+        if not memory_data:
+            return {
+                "role": "Chief Knowledge Officer Agent",
+                "insight": "No historical enterprise memory is available yet. The system will begin learning as more business analyses are completed."
+            }
+
+        total_analyses = len(memory_data)
+
+        average_score = round(
+            sum(record["decision_score"] for record in memory_data) / total_analyses,
+            2
+        )
+
+        latest_record = memory_data[-1]
+        latest_score = latest_record["decision_score"]
+        latest_metric = latest_record["selected_metric"]
+        latest_classification = latest_record["decision_classification"]
+
+        if latest_score >= average_score:
+            trend = "The latest decision score is equal to or above the historical average, suggesting improving or stable decision quality."
+        else:
+            trend = "The latest decision score is below the historical average, suggesting the business should review recent risks or weak performance areas."
+
+        return {
+            "role": "Chief Knowledge Officer Agent",
+            "insight": (
+                f"The Cognitive Enterprise Twin has stored {total_analyses} historical business analysis record(s). "
+                f"The average decision score is {average_score}/100. "
+                f"The latest analysis focused on '{latest_metric}' with a score of {latest_score}/100, classified as '{latest_classification}'. "
+                f"{trend}"
+            )
         }
