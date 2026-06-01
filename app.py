@@ -2,6 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+from agents import (
+    DataScientistAgent,
+    RevenueOptimizationAgent,
+    RiskOfficerAgent,
+    StrategyAgent,
+    CEODecisionAgent
+)
+
 st.set_page_config(
     page_title="Cognitive Enterprise Twin",
     page_icon="🧠",
@@ -12,15 +20,16 @@ st.title("🧠 Cognitive Enterprise Twin")
 st.subheader("A Multi-Agent Decision Intelligence Platform for SMEs")
 
 st.markdown("""
-This prototype analyses SME business data using executive-style AI agents:
-- Data Scientist Agent
-- Revenue Optimization Agent
-- Risk Officer Agent
-- Strategy Agent
-- CEO Decision Agent
+The Cognitive Enterprise Twin uses multiple executive-style AI agents to analyse SME business data, identify risks, discover revenue opportunities, and generate explainable strategic recommendations.
 """)
 
-uploaded_file = st.file_uploader("Upload your SME business dataset", type=["csv", "xlsx"])
+st.sidebar.title("CET Control Panel")
+st.sidebar.markdown("Upload a business dataset to activate the multi-agent decision intelligence workflow.")
+
+uploaded_file = st.sidebar.file_uploader(
+    "Upload CSV or Excel dataset",
+    type=["csv", "xlsx"]
+)
 
 if uploaded_file:
     if uploaded_file.name.endswith(".csv"):
@@ -31,57 +40,104 @@ if uploaded_file:
     st.success("Dataset uploaded successfully.")
 
     st.subheader("Dataset Preview")
-    st.dataframe(df.head())
+    st.dataframe(df.head(), use_container_width=True)
 
-    st.subheader("Dataset Summary")
+    st.subheader("Enterprise Data Summary")
+
     col1, col2, col3 = st.columns(3)
-
-    col1.metric("Rows", df.shape[0])
-    col2.metric("Columns", df.shape[1])
+    col1.metric("Total Records", df.shape[0])
+    col2.metric("Total Columns", df.shape[1])
     col3.metric("Missing Values", int(df.isnull().sum().sum()))
 
     numeric_columns = df.select_dtypes(include=["int64", "float64"]).columns.tolist()
 
     if numeric_columns:
-        st.subheader("Data Scientist Agent")
-        selected_metric = st.selectbox("Select a numeric metric for analysis", numeric_columns)
+        selected_metric = st.selectbox(
+            "Select the main business metric for agent analysis",
+            numeric_columns
+        )
 
         total_value = df[selected_metric].sum()
         average_value = df[selected_metric].mean()
         max_value = df[selected_metric].max()
+
+        st.subheader("Selected Metric Performance")
 
         c1, c2, c3 = st.columns(3)
         c1.metric(f"Total {selected_metric}", round(total_value, 2))
         c2.metric(f"Average {selected_metric}", round(average_value, 2))
         c3.metric(f"Highest {selected_metric}", round(max_value, 2))
 
-        st.subheader("Visual Analysis")
-        fig = px.histogram(df, x=selected_metric, title=f"Distribution of {selected_metric}")
+        st.subheader("Metric Distribution")
+        fig = px.histogram(
+            df,
+            x=selected_metric,
+            title=f"Distribution of {selected_metric}"
+        )
         st.plotly_chart(fig, use_container_width=True)
 
-        st.subheader("Revenue Optimization Agent")
-        st.info(
-            f"The selected metric '{selected_metric}' shows a total value of {round(total_value, 2)}. "
-            f"The platform will use this as a base for revenue opportunity detection."
+        data_agent = DataScientistAgent()
+        revenue_agent = RevenueOptimizationAgent()
+        risk_agent = RiskOfficerAgent()
+        strategy_agent = StrategyAgent()
+        ceo_agent = CEODecisionAgent()
+
+        data_output = data_agent.analyse(df, selected_metric)
+        revenue_output = revenue_agent.analyse(df, selected_metric)
+        risk_output = risk_agent.analyse(df, selected_metric)
+        strategy_output = strategy_agent.analyse(revenue_output, risk_output)
+        ceo_output = ceo_agent.analyse(
+            data_output,
+            revenue_output,
+            risk_output,
+            strategy_output
         )
 
-        st.subheader("Risk Officer Agent")
-        if df[selected_metric].isnull().sum() > 0:
-            st.warning(f"Risk detected: {selected_metric} contains missing values.")
-        else:
-            st.success(f"No missing-value risk detected in {selected_metric}.")
+        st.subheader("Multi-Agent Intelligence Workflow")
 
-        st.subheader("CEO Decision Agent")
+        with st.expander("Data Scientist Agent", expanded=True):
+            st.write(data_output["insight"])
+            st.info(data_output["evidence"])
+
+        with st.expander("Revenue Optimization Agent", expanded=True):
+            st.write(revenue_output["insight"])
+            st.success(revenue_output["recommendation"])
+            st.metric("Estimated Impact", revenue_output["estimated_impact"])
+
+        with st.expander("Risk Officer Agent", expanded=True):
+            st.write(risk_output["risk_assessment"])
+            st.metric("Risk Level", risk_output["risk_level"])
+
+        with st.expander("Strategy Agent", expanded=True):
+            st.write(strategy_output["strategic_view"])
+            st.info(strategy_output["priority"])
+
+        with st.expander("CEO Decision Agent", expanded=True):
+            st.write(ceo_output["final_decision"])
+            st.success(ceo_output["executive_summary"])
+
+        st.subheader("Executive Decision Summary")
+
         st.markdown(f"""
-        **Executive Recommendation:**  
-        The business should review the performance of **{selected_metric}** because it may represent a key driver of SME performance.  
-        
-        **Initial Decision:**  
-        Prioritize deeper analysis of this metric to identify growth opportunities, weak areas, and strategic risks.
+        ### Final Strategic Recommendation
+
+        **Selected Business Metric:** {selected_metric}
+
+        **Revenue View:**  
+        {revenue_output["recommendation"]}
+
+        **Risk View:**  
+        {risk_output["risk_assessment"]}
+
+        **Strategic View:**  
+        {strategy_output["priority"]}
+
+        **CEO Decision:**  
+        {ceo_output["executive_summary"]}
         """)
 
     else:
-        st.warning("No numeric columns found. Please upload a dataset with numeric business metrics.")
+        st.warning("No numeric business metrics found. Please upload a dataset with numeric columns.")
 
 else:
-    st.info("Upload a CSV or Excel file to activate the Cognitive Enterprise Twin.")
+    st.info("Upload a CSV or Excel file from the sidebar to activate the Cognitive Enterprise Twin.")
