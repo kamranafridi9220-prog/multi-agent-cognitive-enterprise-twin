@@ -25,3 +25,30 @@ class StrategicDecisionEngine:
             return "Moderate Strategic Opportunity"
         else:
             return "High-Risk Decision Area"
+
+    def generate_agent_debate(self, revenue_output, risk_output, strategy_output):
+        debate = []
+
+        debate.append({
+            "agent": "Revenue Optimization Agent",
+            "position": revenue_output["recommendation"]
+        })
+
+        debate.append({
+            "agent": "Risk Officer Agent",
+            "position": risk_output["risk_assessment"]
+        })
+
+        debate.append({
+            "agent": "Strategy Agent",
+            "position": strategy_output["priority"]
+        })
+
+        return debate
+
+    def generate_debate_summary(self, debate):
+        return (
+            "The agent debate shows that the revenue perspective identifies growth potential, "
+            "the risk perspective evaluates possible threats, and the strategy perspective balances "
+            "opportunity with cautious execution before the CEO Decision Agent produces the final recommendation."
+        )
