@@ -13,6 +13,7 @@ from agents import (
 
 from decision_engine import StrategicDecisionEngine
 from memory_engine import EnterpriseMemoryEngine
+from forecasting_agent import ForecastingAgent
 
 st.set_page_config(
     page_title="Cognitive Enterprise Twin",
@@ -24,7 +25,7 @@ st.title("🧠 Cognitive Enterprise Twin")
 st.subheader("A Multi-Agent Decision Intelligence Platform for SMEs")
 
 st.markdown("""
-The Cognitive Enterprise Twin uses multiple executive-style AI agents to analyse SME business data, identify risks, discover revenue opportunities, store enterprise memory, and generate explainable strategic recommendations.
+The Cognitive Enterprise Twin uses multiple executive-style AI agents to analyse SME business data, identify risks, discover revenue opportunities, store enterprise memory, forecast future performance, and generate explainable strategic recommendations.
 """)
 
 st.sidebar.title("CET Control Panel")
@@ -86,6 +87,7 @@ if uploaded_file:
         strategy_agent = StrategyAgent()
         ceo_agent = CEODecisionAgent()
         cko_agent = ChiefKnowledgeOfficerAgent()
+        forecasting_agent = ForecastingAgent()
 
         decision_engine = StrategicDecisionEngine()
         memory_engine = EnterpriseMemoryEngine()
@@ -93,7 +95,9 @@ if uploaded_file:
         data_output = data_agent.analyse(df, selected_metric)
         revenue_output = revenue_agent.analyse(df, selected_metric)
         risk_output = risk_agent.analyse(df, selected_metric)
+        forecast_output = forecasting_agent.analyse(df, selected_metric)
         strategy_output = strategy_agent.analyse(revenue_output, risk_output)
+
         ceo_output = ceo_agent.analyse(
             data_output,
             revenue_output,
@@ -138,6 +142,36 @@ if uploaded_file:
         d2.metric("Decision Classification", decision_classification)
 
         st.progress(decision_score / 100)
+
+        st.subheader("Forecasting Agent")
+
+        f1, f2, f3, f4 = st.columns(4)
+        f1.metric("Current Average", forecast_output["current_value"])
+        f2.metric("3-Month Forecast", forecast_output["forecast_3_month"])
+        f3.metric("6-Month Forecast", forecast_output["forecast_6_month"])
+        f4.metric("12-Month Forecast", forecast_output["forecast_12_month"])
+
+        st.info(forecast_output["insight"])
+
+        forecast_df = pd.DataFrame({
+            "Period": ["Current", "3 Months", "6 Months", "12 Months"],
+            "Forecast Value": [
+                forecast_output["current_value"],
+                forecast_output["forecast_3_month"],
+                forecast_output["forecast_6_month"],
+                forecast_output["forecast_12_month"]
+            ]
+        })
+
+        forecast_fig = px.line(
+            forecast_df,
+            x="Period",
+            y="Forecast Value",
+            markers=True,
+            title=f"Forecast Trend for {selected_metric}"
+        )
+
+        st.plotly_chart(forecast_fig, use_container_width=True)
 
         st.subheader("Multi-Agent Intelligence Workflow")
 
@@ -195,6 +229,9 @@ if uploaded_file:
         **Decision Score:** {decision_score}/100
 
         **Decision Classification:** {decision_classification}
+
+        **Forecast View:**  
+        {forecast_output["insight"]}
 
         **Revenue View:**  
         {revenue_output["recommendation"]}
