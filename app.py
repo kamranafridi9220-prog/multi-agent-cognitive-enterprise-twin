@@ -10,6 +10,8 @@ from agents import (
     CEODecisionAgent
 )
 
+from decision_engine import StrategicDecisionEngine
+
 st.set_page_config(
     page_title="Cognitive Enterprise Twin",
     page_icon="🧠",
@@ -81,6 +83,7 @@ if uploaded_file:
         risk_agent = RiskOfficerAgent()
         strategy_agent = StrategyAgent()
         ceo_agent = CEODecisionAgent()
+        decision_engine = StrategicDecisionEngine()
 
         data_output = data_agent.analyse(df, selected_metric)
         revenue_output = revenue_agent.analyse(df, selected_metric)
@@ -92,6 +95,21 @@ if uploaded_file:
             risk_output,
             strategy_output
         )
+
+        decision_score = decision_engine.generate_decision_score(
+            risk_output["risk_level"],
+            revenue_output["estimated_impact"]
+        )
+
+        decision_classification = decision_engine.classify_decision(decision_score)
+
+        st.subheader("Strategic Decision Score")
+
+        d1, d2 = st.columns(2)
+        d1.metric("Decision Score", f"{decision_score}/100")
+        d2.metric("Decision Classification", decision_classification)
+
+        st.progress(decision_score / 100)
 
         st.subheader("Multi-Agent Intelligence Workflow")
 
@@ -122,6 +140,10 @@ if uploaded_file:
         ### Final Strategic Recommendation
 
         **Selected Business Metric:** {selected_metric}
+
+        **Decision Score:** {decision_score}/100
+
+        **Decision Classification:** {decision_classification}
 
         **Revenue View:**  
         {revenue_output["recommendation"]}
