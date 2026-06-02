@@ -14,6 +14,7 @@ from agents import (
 from decision_engine import StrategicDecisionEngine
 from memory_engine import EnterpriseMemoryEngine
 from forecasting_agent import ForecastingAgent
+from opportunity_engine import OpportunityDiscoveryEngine
 
 st.set_page_config(
     page_title="Cognitive Enterprise Twin",
@@ -88,6 +89,7 @@ if uploaded_file:
         ceo_agent = CEODecisionAgent()
         cko_agent = ChiefKnowledgeOfficerAgent()
         forecasting_agent = ForecastingAgent()
+        opportunity_engine = OpportunityDiscoveryEngine()
 
         decision_engine = StrategicDecisionEngine()
         memory_engine = EnterpriseMemoryEngine()
@@ -96,6 +98,7 @@ if uploaded_file:
         revenue_output = revenue_agent.analyse(df, selected_metric)
         risk_output = risk_agent.analyse(df, selected_metric)
         forecast_output = forecasting_agent.analyse(df, selected_metric)
+        opportunities = opportunity_engine.discover_opportunities(df, selected_metric)
         strategy_output = strategy_agent.analyse(revenue_output, risk_output)
 
         ceo_output = ceo_agent.analyse(
@@ -142,6 +145,20 @@ if uploaded_file:
         d2.metric("Decision Classification", decision_classification)
 
         st.progress(decision_score / 100)
+
+        st.subheader("Opportunity Discovery Engine")
+
+        for opportunity in opportunities:
+            if opportunity["priority"] == "High":
+                st.error(f"**{opportunity['type']}**")
+            elif opportunity["priority"] == "Medium":
+                st.warning(f"**{opportunity['type']}**")
+            else:
+                st.info(f"**{opportunity['type']}**")
+
+            st.write(opportunity["insight"])
+            st.success(opportunity["recommendation"])
+            st.markdown("---")
 
         st.subheader("Forecasting Agent")
 
@@ -221,6 +238,10 @@ if uploaded_file:
 
         st.subheader("Executive Decision Summary")
 
+        opportunity_summary = " ".join(
+            [f"{item['type']}: {item['recommendation']}" for item in opportunities]
+        )
+
         st.markdown(f"""
         ### Final Strategic Recommendation
 
@@ -229,6 +250,9 @@ if uploaded_file:
         **Decision Score:** {decision_score}/100
 
         **Decision Classification:** {decision_classification}
+
+        **Opportunity View:**  
+        {opportunity_summary}
 
         **Forecast View:**  
         {forecast_output["insight"]}
