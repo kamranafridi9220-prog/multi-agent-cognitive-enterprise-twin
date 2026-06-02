@@ -375,8 +375,6 @@ Receive Executive Recommendation
 
 # 📸 Application Screenshots
 
-# 📸 Application Screenshots
-
 ## Dashboard Overview
 
 ![Dashboard Overview](screenshots/dashboard-overview.png)
