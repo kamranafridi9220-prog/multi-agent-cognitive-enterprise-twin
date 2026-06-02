@@ -23,14 +23,14 @@ st.set_page_config(
 )
 
 st.title("🧠 Cognitive Enterprise Twin")
-st.subheader("A Multi-Agent Decision Intelligence Platform for SMEs")
+st.subheader("A Multi-Agent AI Decision Intelligence Platform for SMEs")
 
 st.markdown("""
-The Cognitive Enterprise Twin uses multiple executive-style AI agents to analyse SME business data, identify risks, discover revenue opportunities, store enterprise memory, forecast future performance, and generate explainable strategic recommendations.
+The Cognitive Enterprise Twin uses multiple executive-style AI agents to analyse SME business data, identify risks, discover revenue opportunities, store enterprise memory, forecast future performance, and generate AI-powered strategic recommendations.
 """)
 
 st.sidebar.title("CET Control Panel")
-st.sidebar.markdown("Upload a business dataset to activate the multi-agent decision intelligence workflow.")
+st.sidebar.markdown("Upload a business dataset to activate the multi-agent AI decision intelligence workflow.")
 
 uploaded_file = st.sidebar.file_uploader(
     "Upload CSV or Excel dataset",
@@ -190,7 +190,7 @@ if uploaded_file:
 
         st.plotly_chart(forecast_fig, use_container_width=True)
 
-        st.subheader("Multi-Agent Intelligence Workflow")
+        st.subheader("Multi-Agent AI Intelligence Workflow")
 
         with st.expander("Data Scientist Agent", expanded=True):
             st.write(data_output["insight"])
@@ -199,11 +199,14 @@ if uploaded_file:
         with st.expander("Revenue Optimization Agent", expanded=True):
             st.write(revenue_output["insight"])
             st.success(revenue_output["recommendation"])
-            st.metric("Estimated Impact", revenue_output["estimated_impact"])
+            st.markdown("### AI Revenue Reasoning")
+            st.write(revenue_output.get("ai_reasoning", "AI reasoning not available."))
 
         with st.expander("Risk Officer Agent", expanded=True):
             st.write(risk_output["risk_assessment"])
             st.metric("Risk Level", risk_output["risk_level"])
+            st.markdown("### AI Risk Reasoning")
+            st.write(risk_output.get("ai_reasoning", "AI reasoning not available."))
 
         with st.expander("Strategy Agent", expanded=True):
             st.write(strategy_output["strategic_view"])
@@ -212,6 +215,8 @@ if uploaded_file:
         with st.expander("CEO Decision Agent", expanded=True):
             st.write(ceo_output["final_decision"])
             st.success(ceo_output["executive_summary"])
+            st.markdown("### AI CEO Reasoning")
+            st.write(ceo_output.get("ai_reasoning", "AI reasoning not available."))
 
         st.subheader("Strategic Agent Debate")
 
@@ -232,6 +237,9 @@ if uploaded_file:
         st.subheader("Chief Knowledge Officer Agent")
 
         st.success(cko_output["insight"])
+
+        st.markdown("### AI Organizational Learning")
+        st.write(cko_output.get("ai_reasoning", "AI organizational learning not available."))
 
         with st.expander("View Full Enterprise Memory"):
             st.json(updated_memory)
@@ -258,19 +266,19 @@ if uploaded_file:
         {forecast_output["insight"]}
 
         **Revenue View:**  
-        {revenue_output["recommendation"]}
+        {revenue_output["ai_reasoning"]}
 
         **Risk View:**  
-        {risk_output["risk_assessment"]}
+        {risk_output["ai_reasoning"]}
 
         **Strategic Debate Summary:**  
         {debate_summary}
 
         **Organizational Learning:**  
-        {cko_output["insight"]}
+        {cko_output["ai_reasoning"]}
 
         **CEO Decision:**  
-        {ceo_output["executive_summary"]}
+        {ceo_output["ai_reasoning"]}
         """)
 
     else:
