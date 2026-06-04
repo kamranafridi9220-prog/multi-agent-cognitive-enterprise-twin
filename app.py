@@ -16,6 +16,14 @@ from memory_engine import EnterpriseMemoryEngine
 from forecasting_agent import ForecastingAgent
 from opportunity_engine import OpportunityDiscoveryEngine
 
+from boardroom_agents import (
+    ChiefFinancialOfficerAgent,
+    ChiefMarketingOfficerAgent,
+    ChiefOperationsOfficerAgent,
+    ChiefRiskOfficerBoardAgent,
+    BoardroomChairAgent
+)
+
 st.set_page_config(
     page_title="Cognitive Enterprise Twin",
     page_icon="🧠",
@@ -66,6 +74,7 @@ if uploaded_file:
         total_value = df[selected_metric].sum()
         average_value = df[selected_metric].mean()
         max_value = df[selected_metric].max()
+        missing_values = df[selected_metric].isnull().sum()
 
         st.subheader("Selected Metric Performance")
 
@@ -94,6 +103,12 @@ if uploaded_file:
         decision_engine = StrategicDecisionEngine()
         memory_engine = EnterpriseMemoryEngine()
 
+        cfo_agent = ChiefFinancialOfficerAgent()
+        cmo_agent = ChiefMarketingOfficerAgent()
+        coo_agent = ChiefOperationsOfficerAgent()
+        cro_board_agent = ChiefRiskOfficerBoardAgent()
+        boardroom_chair = BoardroomChairAgent()
+
         data_output = data_agent.analyse(df, selected_metric)
         revenue_output = revenue_agent.analyse(df, selected_metric)
         risk_output = risk_agent.analyse(df, selected_metric)
@@ -114,6 +129,38 @@ if uploaded_file:
         )
 
         decision_classification = decision_engine.classify_decision(decision_score)
+
+        cfo_view = cfo_agent.analyse(
+            selected_metric,
+            total_value,
+            average_value,
+            decision_score
+        )
+
+        cmo_view = cmo_agent.analyse(
+            selected_metric,
+            total_value,
+            average_value
+        )
+
+        coo_view = coo_agent.analyse(
+            selected_metric,
+            missing_values,
+            risk_output["risk_level"]
+        )
+
+        cro_view = cro_board_agent.analyse(
+            selected_metric,
+            risk_output["risk_assessment"],
+            risk_output["risk_level"]
+        )
+
+        boardroom_consensus = boardroom_chair.summarise_boardroom(
+            cfo_view,
+            cmo_view,
+            coo_view,
+            cro_view
+        )
 
         agent_debate = decision_engine.generate_agent_debate(
             revenue_output,
@@ -218,6 +265,23 @@ if uploaded_file:
             st.markdown("### AI CEO Reasoning")
             st.write(ceo_output.get("ai_reasoning", "AI reasoning not available."))
 
+        st.subheader("AI Executive Boardroom")
+
+        with st.expander("Chief Financial Officer View", expanded=True):
+            st.write(cfo_view)
+
+        with st.expander("Chief Marketing Officer View", expanded=True):
+            st.write(cmo_view)
+
+        with st.expander("Chief Operations Officer View", expanded=True):
+            st.write(coo_view)
+
+        with st.expander("Chief Risk Officer View", expanded=True):
+            st.write(cro_view)
+
+        st.subheader("Boardroom Consensus Recommendation")
+        st.success(boardroom_consensus)
+
         st.subheader("Strategic Agent Debate")
 
         st.info(debate_summary)
@@ -270,6 +334,9 @@ if uploaded_file:
 
         **Risk View:**  
         {risk_output["ai_reasoning"]}
+
+        **AI Executive Boardroom Consensus:**  
+        {boardroom_consensus}
 
         **Strategic Debate Summary:**  
         {debate_summary}
