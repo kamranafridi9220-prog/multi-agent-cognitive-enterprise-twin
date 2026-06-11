@@ -337,7 +337,7 @@ if uploaded_file:
 
         st.markdown("### Digital CEO Shock Decision")
         st.success(shock_result["ceo_response"])
-                st.subheader("AI Executive Voting System")
+        st.subheader("AI Executive Voting System")
 
         st.markdown("""
         The AI Executive Voting System simulates how the executive board would vote on the current strategic decision.
