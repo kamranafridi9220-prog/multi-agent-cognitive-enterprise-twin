@@ -5,6 +5,7 @@ from health_score_engine import EnterpriseHealthScoreEngine
 from shock_simulator import StrategicShockSimulator
 from executive_voting_engine import ExecutiveVotingEngine
 from enterprise_time_machine import EnterpriseTimeMachine
+from competitor_twin import AICompetitorTwin
 
 from agents import (
     DataScientistAgent,
@@ -423,6 +424,54 @@ if uploaded_file:
 
         st.markdown("### Time Machine Recommendation")
         st.info(future_result["recommendation"])
+        st.subheader("AI Competitor Twin")
+
+        st.markdown("""
+        The AI Competitor Twin simulates how different competitor profiles may affect enterprise performance, market position, and strategic risk.
+        It helps leaders prepare defensive and offensive strategies against competitive pressure.
+        """)
+
+        competitor_profiles = [
+            "Low-cost competitor",
+            "Premium competitor",
+            "Technology-driven competitor",
+            "New market entrant",
+            "Dominant market leader"
+        ]
+
+        selected_competitor = st.selectbox(
+            "Select competitor profile",
+            competitor_profiles
+        )
+
+        competitor_twin = AICompetitorTwin()
+
+        competitor_result = competitor_twin.analyse_competitor(
+            selected_metric=selected_metric,
+            total_value=total_value,
+            average_value=average_value,
+            competitor_type=selected_competitor
+        )
+
+        ct1, ct2, ct3 = st.columns(3)
+
+        ct1.metric("Competitor Type", competitor_result["competitor_type"])
+        ct2.metric("Threat Level", competitor_result["threat_level"])
+        ct3.metric("Estimated Pressure", competitor_result["estimated_pressure"])
+
+        ct4, ct5 = st.columns(2)
+
+        ct4.metric("Current Value", round(total_value, 2))
+        ct5.metric("Value After Competitive Pressure", competitor_result["future_value_after_pressure"])
+
+        st.markdown("### Competitor Strategy")
+        st.warning(competitor_result["competitor_strategy"])
+
+        st.markdown("### Enterprise Risk")
+        st.error(competitor_result["enterprise_risk"])
+
+        st.markdown("### Recommended Strategic Response")
+        st.success(competitor_result["recommended_response"])
         st.subheader("Multi-Agent AI Intelligence Workflow")
 
         with st.expander("Data Scientist Agent", expanded=True):
