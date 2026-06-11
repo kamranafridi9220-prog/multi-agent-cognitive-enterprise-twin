@@ -3,6 +3,12 @@ class ExecutiveVotingEngine:
     Simulates executive voting across CFO, CMO, COO, and CRO agents.
     """
 
+    def _to_number(self, value):
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return 0
+
     def generate_votes(
         self,
         decision_score,
@@ -11,9 +17,16 @@ class ExecutiveVotingEngine:
         health_score=None,
         shock_severity=None
     ):
+        decision_score = self._to_number(decision_score)
+        estimated_impact = self._to_number(estimated_impact)
+
+        if risk_level is None:
+            risk_level = "Medium"
+
+        risk_level = str(risk_level)
+
         votes = {}
 
-        # CFO logic
         if decision_score >= 70 and estimated_impact >= 0:
             votes["CFO"] = {
                 "vote": "YES",
@@ -30,7 +43,6 @@ class ExecutiveVotingEngine:
                 "reason": "The financial risk appears too high for immediate approval."
             }
 
-        # CMO logic
         if estimated_impact > 0:
             votes["CMO"] = {
                 "vote": "YES",
@@ -42,7 +54,6 @@ class ExecutiveVotingEngine:
                 "reason": "The market impact is unclear and requires further customer validation."
             }
 
-        # COO logic
         if risk_level in ["Low", "Moderate", "Medium"]:
             votes["COO"] = {
                 "vote": "YES",
@@ -54,7 +65,6 @@ class ExecutiveVotingEngine:
                 "reason": "Operational execution risk should be reviewed before approval."
             }
 
-        # CRO logic
         if risk_level == "Low":
             votes["CRO"] = {
                 "vote": "YES",
