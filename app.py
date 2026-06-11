@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 from health_score_engine import EnterpriseHealthScoreEngine
 from shock_simulator import StrategicShockSimulator
+from executive_voting_engine import ExecutiveVotingEngine
 
 from agents import (
     DataScientistAgent,
@@ -336,6 +337,48 @@ if uploaded_file:
 
         st.markdown("### Digital CEO Shock Decision")
         st.success(shock_result["ceo_response"])
+                st.subheader("AI Executive Voting System")
+
+        st.markdown("""
+        The AI Executive Voting System simulates how the executive board would vote on the current strategic decision.
+        Each executive agent votes based on financial viability, commercial opportunity, operational readiness, and risk exposure.
+        """)
+
+        voting_engine = ExecutiveVotingEngine()
+
+        voting_result = voting_engine.generate_votes(
+            decision_score=decision_score,
+            risk_level=risk_output["risk_level"],
+            estimated_impact=revenue_output["estimated_impact"],
+            health_score=health_result["overall_score"],
+            shock_severity=shock_result["severity"]
+        )
+
+        v1, v2, v3, v4 = st.columns(4)
+
+        v1.metric("YES Votes", voting_result["yes_votes"])
+        v2.metric("CAUTION Votes", voting_result["caution_votes"])
+        v3.metric("NO Votes", voting_result["no_votes"])
+        v4.metric("Confidence", f"{voting_result['confidence']}%")
+
+        st.markdown("### Executive Vote Breakdown")
+
+        for executive, vote_data in voting_result["votes"].items():
+            if vote_data["vote"] == "YES":
+                st.success(f"**{executive}: {vote_data['vote']}** — {vote_data['reason']}")
+            elif vote_data["vote"] == "CAUTION":
+                st.warning(f"**{executive}: {vote_data['vote']}** — {vote_data['reason']}")
+            else:
+                st.error(f"**{executive}: {vote_data['vote']}** — {vote_data['reason']}")
+
+        st.markdown("### Final Board Vote Decision")
+
+        if voting_result["final_result"] == "Approved":
+            st.success(voting_result["final_result"])
+        elif voting_result["final_result"] == "Conditional Approval":
+            st.warning(voting_result["final_result"])
+        else:
+            st.error(voting_result["final_result"])
         st.subheader("Multi-Agent AI Intelligence Workflow")
 
         with st.expander("Data Scientist Agent", expanded=True):
