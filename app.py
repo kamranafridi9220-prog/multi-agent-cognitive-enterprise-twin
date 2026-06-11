@@ -15,6 +15,7 @@ from decision_engine import StrategicDecisionEngine
 from memory_engine import EnterpriseMemoryEngine
 from forecasting_agent import ForecastingAgent
 from opportunity_engine import OpportunityDiscoveryEngine
+from llm_engine import LLMEngine
 
 from boardroom_agents import (
     ChiefFinancialOfficerAgent,
@@ -281,6 +282,78 @@ if uploaded_file:
 
         st.subheader("Boardroom Consensus Recommendation")
         st.success(boardroom_consensus)
+
+        st.subheader("Digital CEO Advisor")
+
+        st.markdown("""
+        Ask the Digital CEO a strategic business question based on the uploaded dataset, agent analysis, boardroom discussion, enterprise memory, and decision intelligence results.
+        """)
+
+        ceo_question = st.text_area(
+            "Ask the Digital CEO",
+            placeholder="Example: What should the business focus on next quarter?"
+        )
+
+        if st.button("Ask Digital CEO"):
+            if ceo_question.strip():
+                digital_ceo_system_prompt = """
+                You are the Digital CEO inside a Cognitive Enterprise Twin.
+                Your role is to answer strategic business questions using the available dataset analysis,
+                revenue insights, risk insights, forecasting results, boardroom consensus, enterprise memory,
+                and organizational learning.
+
+                Provide clear, practical, executive-level advice.
+                Do not mention that you are an AI model.
+                """
+
+                digital_ceo_user_prompt = f"""
+                User question:
+                {ceo_question}
+
+                Selected business metric:
+                {selected_metric}
+
+                Total value:
+                {round(total_value, 2)}
+
+                Average value:
+                {round(average_value, 2)}
+
+                Decision score:
+                {decision_score}/100
+
+                Decision classification:
+                {decision_classification}
+
+                Revenue reasoning:
+                {revenue_output.get("ai_reasoning")}
+
+                Risk reasoning:
+                {risk_output.get("ai_reasoning")}
+
+                Forecast insight:
+                {forecast_output.get("insight")}
+
+                Boardroom consensus:
+                {boardroom_consensus}
+
+                Enterprise memory:
+                {historical_summary}
+
+                Chief Knowledge Officer insight:
+                {cko_output.get("ai_reasoning")}
+
+                Provide a concise but strategic CEO-level answer.
+                """
+
+                digital_ceo_response = LLMEngine().generate_response(
+                    digital_ceo_system_prompt,
+                    digital_ceo_user_prompt
+                )
+
+                st.success(digital_ceo_response)
+            else:
+                st.warning("Please enter a strategic question for the Digital CEO.")
 
         st.subheader("Strategic Agent Debate")
 
