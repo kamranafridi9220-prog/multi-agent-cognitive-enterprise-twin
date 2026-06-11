@@ -4,6 +4,7 @@ import plotly.express as px
 from health_score_engine import EnterpriseHealthScoreEngine
 from shock_simulator import StrategicShockSimulator
 from executive_voting_engine import ExecutiveVotingEngine
+from enterprise_time_machine import EnterpriseTimeMachine
 
 from agents import (
     DataScientistAgent,
@@ -379,6 +380,49 @@ if uploaded_file:
             st.warning(voting_result["final_result"])
         else:
             st.error(voting_result["final_result"])
+            st.subheader("Enterprise Time Machine")
+
+        st.markdown("""
+        The Enterprise Time Machine simulates future business outcomes based on strategic what-if scenarios.
+        It helps leaders explore how different decisions may affect future performance, risk, and enterprise value.
+        """)
+
+        time_machine_scenarios = [
+            "Marketing spend increases by 15%",
+            "Customer retention improves by 10%",
+            "Operational efficiency improves by 20%",
+            "Pricing increases by 5%",
+            "Sales conversion improves by 12%",
+            "Market demand decreases by 10%"
+        ]
+
+        selected_future_scenario = st.selectbox(
+            "Select a future scenario",
+            time_machine_scenarios
+        )
+
+        time_machine = EnterpriseTimeMachine()
+
+        future_result = time_machine.simulate_future(
+            selected_metric=selected_metric,
+            total_value=total_value,
+            average_value=average_value,
+            scenario=selected_future_scenario
+        )
+
+        tm1, tm2, tm3 = st.columns(3)
+
+        tm1.metric("Current Value", future_result["current_total_value"])
+        tm2.metric("Predicted Change", future_result["predicted_change"])
+        tm3.metric("Predicted Future Value", future_result["predicted_future_value"])
+
+        tm4, tm5 = st.columns(2)
+
+        tm4.metric("Future Direction", future_result["direction"])
+        tm5.metric("Predicted Risk", future_result["risk_level"])
+
+        st.markdown("### Time Machine Recommendation")
+        st.info(future_result["recommendation"])
         st.subheader("Multi-Agent AI Intelligence Workflow")
 
         with st.expander("Data Scientist Agent", expanded=True):
