@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from health_score_engine import EnterpriseHealthScoreEngine
+from shock_simulator import StrategicShockSimulator
 
 from agents import (
     DataScientistAgent,
@@ -283,7 +284,58 @@ if uploaded_file:
         )
 
         st.plotly_chart(forecast_fig, use_container_width=True)
+        st.subheader("Strategic Shock Simulator")
 
+        st.markdown("""
+        The Strategic Shock Simulator tests how the enterprise would respond to major business disruptions or opportunities.
+        Each scenario generates a simulated boardroom response from the CFO, CMO, COO, CRO, and Digital CEO.
+        """)
+
+        shock_scenarios = [
+            "Revenue drops by 10%",
+            "Revenue drops by 20%",
+            "Costs increase by 15%",
+            "Competitor enters market",
+            "Supply chain disruption",
+            "Customer demand surge"
+        ]
+
+        selected_shock = st.selectbox(
+            "Select a strategic shock scenario",
+            shock_scenarios
+        )
+
+        shock_simulator = StrategicShockSimulator()
+
+        shock_result = shock_simulator.simulate_shock(
+            selected_metric=selected_metric,
+            total_value=total_value,
+            average_value=average_value,
+            scenario=selected_shock
+        )
+
+        s1, s2, s3 = st.columns(3)
+
+        s1.metric("Scenario", shock_result["scenario"])
+        s2.metric("Severity", shock_result["severity"])
+        s3.metric("Estimated Impact", shock_result["estimated_impact"])
+
+        st.markdown("### Simulated Executive Boardroom Response")
+
+        with st.expander("CFO Shock Response", expanded=True):
+            st.write(shock_result["cfo_response"])
+
+        with st.expander("CMO Shock Response", expanded=True):
+            st.write(shock_result["cmo_response"])
+
+        with st.expander("COO Shock Response", expanded=True):
+            st.write(shock_result["coo_response"])
+
+        with st.expander("CRO Shock Response", expanded=True):
+            st.write(shock_result["cro_response"])
+
+        st.markdown("### Digital CEO Shock Decision")
+        st.success(shock_result["ceo_response"])
         st.subheader("Multi-Agent AI Intelligence Workflow")
 
         with st.expander("Data Scientist Agent", expanded=True):
