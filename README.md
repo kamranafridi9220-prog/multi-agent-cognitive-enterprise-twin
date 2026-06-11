@@ -2,11 +2,11 @@
 
 ## A Multi-Agent Decision Intelligence Platform for SMEs
 
-The **Cognitive Enterprise Twin (CET)** is an advanced AI-powered decision intelligence platform designed to help Small and Medium-Sized Enterprises (SMEs) transform business data into strategic insights, forecasts, opportunities, organizational learning, and executive-level recommendations.
+The **Cognitive Enterprise Twin (CET)** is an advanced AI-powered decision intelligence platform designed to help Small and Medium-Sized Enterprises (SMEs) transform business data into strategic insights, forecasts, opportunities, organizational learning, competitive intelligence, scenario simulations, and executive-level recommendations.
 
-Unlike traditional Business Intelligence dashboards that primarily focus on descriptive analytics, the Cognitive Enterprise Twin combines multiple specialized AI agents, enterprise memory, forecasting capabilities, strategic debate mechanisms, and organizational learning to support more informed and explainable business decision-making.
+Unlike traditional Business Intelligence dashboards that primarily focus on descriptive analytics, the Cognitive Enterprise Twin combines multiple specialized AI agents, enterprise memory, forecasting capabilities, executive boardroom simulations, strategic debate mechanisms, future scenario modelling, competitive intelligence, and organizational learning to support more informed and explainable business decision-making.
 
-The platform represents an initial step toward the development of a digital cognitive layer capable of continuously analysing, learning, reasoning, and supporting strategic business decisions.
+The platform represents an initial step toward the development of a digital cognitive layer capable of continuously analysing, learning, reasoning, simulating, and supporting strategic business decisions.
 
 ---
 
@@ -33,9 +33,11 @@ The long-term vision of the Cognitive Enterprise Twin is to create an intelligen
 * Learning from historical decisions
 * Forecasting future outcomes
 * Simulating strategic scenarios
+* Modelling competitive threats
 * Supporting executive decision-making
+* Providing explainable AI recommendations
 
-The platform aims to provide SMEs with capabilities traditionally available only to large enterprises with dedicated strategy, analytics, and consulting teams.
+The platform aims to provide SMEs with capabilities traditionally available only to large enterprises with dedicated strategy, analytics, consulting, and business intelligence teams.
 
 ---
 
@@ -54,9 +56,11 @@ However, executives typically require answers to more complex questions:
 * What opportunities exist?
 * What risks should be monitored?
 * What may happen in the future?
+* What would happen under different business scenarios?
+* How should we respond to competitors?
 * What strategic action should be taken?
 
-The Cognitive Enterprise Twin was developed to bridge this gap by introducing multi-agent reasoning and decision intelligence capabilities into the business analytics workflow.
+The Cognitive Enterprise Twin was developed to bridge this gap by introducing multi-agent reasoning, scenario simulation, competitive intelligence, organizational learning, and decision intelligence capabilities into the business analytics workflow.
 
 ---
 
@@ -69,11 +73,23 @@ Business Dataset
         ↓
 Data Processing Layer
         ↓
+Enterprise Health Score Engine
+        ↓
 Multi-Agent Intelligence Layer
         ↓
 Strategic Debate Layer
         ↓
 Decision Intelligence Engine
+        ↓
+AI Executive Boardroom
+        ↓
+Executive Voting System
+        ↓
+Strategic Shock Simulator
+        ↓
+Enterprise Time Machine
+        ↓
+AI Competitor Twin
         ↓
 Enterprise Memory Layer
         ↓
@@ -185,6 +201,31 @@ Outputs:
 
 ---
 
+# 🏥 Enterprise Health Score Engine
+
+The Enterprise Health Score Engine provides a comprehensive assessment of organizational performance across multiple business dimensions.
+
+The engine evaluates:
+
+* Financial Health
+* Revenue Health
+* Growth Health
+* Risk Health
+* Operational Health
+
+Outputs include:
+
+* Enterprise Health Score
+* Enterprise Status Classification
+* Strengths Detection
+* Weakness Detection
+* Strategic Health Assessment
+* Digital CEO Recommendation
+
+The Enterprise Health Score acts as an executive-level indicator of organizational condition before strategic decisions are made.
+
+---
+
 # 🏢 Enterprise Memory Engine
 
 One of the most innovative components of the platform is the Enterprise Memory Engine.
@@ -202,12 +243,14 @@ The memory layer captures:
 * Executive recommendations
 
 This creates a foundation for organizational learning and future knowledge accumulation.
+
 ---
+
 # 🏛️ AI Executive Boardroom
 
 A major enhancement to the Cognitive Enterprise Twin is the introduction of the AI Executive Boardroom.
 
-Rather than relying on a single AI recommendation, the platform now simulates a virtual executive leadership team where multiple executive agents independently evaluate business performance before contributing to a board-level strategic recommendation.
+Rather than relying on a single AI recommendation, the platform simulates a virtual executive leadership team where multiple executive agents independently evaluate business performance before contributing to a board-level strategic recommendation.
 
 The Executive Boardroom introduces organizational perspectives commonly found within enterprise leadership structures.
 
@@ -281,76 +324,6 @@ Outputs:
 
 ---
 
-# 🔍 Opportunity Discovery Engine
-
-The Opportunity Discovery Engine proactively searches for business opportunities within uploaded datasets.
-
-Current capabilities include:
-
-### High-Performance Opportunities
-
-Identifies:
-
-* High-performing records
-* Exceptional business outcomes
-* Growth patterns
-
-### Improvement Opportunities
-
-Identifies:
-
-* Underperforming records
-* Operational weaknesses
-* Revenue improvement areas
-
-### Performance Variation Opportunities
-
-Identifies:
-
-* High variability patterns
-* Potential segmentation opportunities
-* Areas requiring deeper investigation
-
----
-
-# 📈 Forecasting Agent
-
-The Forecasting Agent provides predictive insights regarding future business performance.
-
-Current outputs include:
-
-* Current performance baseline
-* 3-Month forecast
-* 6-Month forecast
-* 12-Month forecast
-
-The forecasting component introduces predictive analytics capabilities into the decision-making process.
-
----
-
-# ⚖️ Strategic Debate Engine
-
-A unique feature of the Cognitive Enterprise Twin is its strategic debate mechanism.
-
-Rather than generating a single recommendation immediately, multiple agents contribute competing viewpoints.
-
-Example:
-
-Revenue Perspective:
-
-* Growth opportunities
-
-Risk Perspective:
-
-* Potential threats
-
-Strategy Perspective:
-
-* Balanced recommendation
-
-These perspectives are synthesized before the final executive recommendation is produced.
-
----
 # 🤝 Boardroom Consensus Engine
 
 Following executive evaluation, the Cognitive Enterprise Twin generates a Boardroom Consensus Recommendation.
@@ -361,8 +334,6 @@ The Boardroom Consensus Engine combines insights from:
 * Chief Marketing Officer
 * Chief Operations Officer
 * Chief Risk Officer
-
-The engine synthesizes executive viewpoints into a unified strategic action plan.
 
 Capabilities include:
 
@@ -375,26 +346,98 @@ Capabilities include:
 This creates a more realistic decision-support environment that mirrors collaborative executive decision-making processes commonly found within modern organizations.
 
 ---
-# 🎯 Decision Intelligence Engine
 
-The Decision Intelligence Engine converts agent outputs into structured strategic recommendations.
+# 🌪️ Strategic Shock Simulator
 
-Capabilities include:
+The Strategic Shock Simulator allows leaders to test how the organization may respond to disruptive business events.
 
-### Decision Scoring
+Available simulations include:
 
-Generates:
+* Revenue decline scenarios
+* Cost increase scenarios
+* Competitive threats
+* Supply chain disruptions
+* Demand surges
 
-```text
-0 – 40   High Risk
-41 – 60  Moderate Risk
-61 – 80  Strategic Opportunity
-81 – 100 Strong Strategic Opportunity
-```
+The simulator generates responses from:
 
-### Decision Classification
+* CFO
+* CMO
+* COO
+* CRO
+* Digital CEO
 
-Provides explainable decision categories that executives can understand and communicate.
+This creates a realistic executive planning environment capable of supporting scenario-based decision-making.
+
+---
+
+# 🗳️ AI Executive Voting System
+
+The AI Executive Voting System introduces board-level voting mechanisms into the decision intelligence workflow.
+
+Executive participants include:
+
+* Chief Financial Officer
+* Chief Marketing Officer
+* Chief Operations Officer
+* Chief Risk Officer
+
+Outputs include:
+
+* YES votes
+* CAUTION votes
+* NO votes
+* Voting confidence score
+* Final board decision
+
+This feature simulates collaborative executive governance processes commonly used in enterprise environments.
+
+---
+
+# ⏳ Enterprise Time Machine
+
+The Enterprise Time Machine simulates future organizational outcomes through strategic what-if analysis.
+
+Example scenarios include:
+
+* Increased marketing investment
+* Improved customer retention
+* Operational efficiency improvements
+* Pricing changes
+* Conversion rate improvements
+* Market demand reduction
+
+Outputs include:
+
+* Predicted future value
+* Predicted change
+* Future risk assessment
+* Strategic recommendations
+
+The module extends the platform from descriptive analytics into predictive and prescriptive decision intelligence.
+
+---
+
+# 🏆 AI Competitor Twin
+
+The AI Competitor Twin simulates external competitive pressure and strategic market threats.
+
+Supported competitor profiles include:
+
+* Low-cost competitors
+* Premium competitors
+* Technology-driven competitors
+* New market entrants
+* Dominant market leaders
+
+Outputs include:
+
+* Threat level assessment
+* Competitive pressure estimation
+* Market risk analysis
+* Recommended strategic response
+
+The Competitor Twin enables organizations to evaluate defensive and offensive strategic options before competitive events occur.
 
 ---
 
@@ -407,36 +450,39 @@ Supports:
 * CSV
 * XLSX
 
-### Dataset Preview
+### Enterprise Health Scoring
 
 Provides:
 
-* Data inspection
-* Business record review
+* Financial health analysis
+* Revenue health analysis
+* Growth assessment
+* Risk assessment
+* Operational health assessment
 
-### KPI Analytics
+### Forecasting
 
-Automatically calculates:
+Provides:
 
-* Total values
-* Average values
-* Maximum values
+* 3-month forecasts
+* 6-month forecasts
+* 12-month forecasts
 
-### Data Visualization
+### Strategic Shock Simulation
 
-Includes:
+Simulates major business disruptions and opportunities.
 
-* Histograms
-* Forecast charts
-* Metric distributions
+### Executive Voting
 
-### Multi-Agent Analysis
+Simulates board-level strategic approval processes.
 
-Coordinates:
+### Enterprise Time Machine
 
-* Analytical reasoning
-* Strategic reasoning
-* Executive reasoning
+Explores future strategic outcomes through what-if analysis.
+
+### AI Competitor Twin
+
+Evaluates competitor pressure and strategic market threats.
 
 ### Organizational Learning
 
@@ -453,40 +499,6 @@ Produces a consolidated strategic recommendation from multiple executive viewpoi
 ### Executive-Level Reasoning
 
 Generates detailed boardroom-style recommendations rather than simple analytical outputs.
-
-### Organizational Intelligence
-
-Combines enterprise memory, historical learning, and executive reasoning to improve strategic decision support.
-
----
-
-# 🖥️ User Workflow
-
-```text
-Upload Dataset
-       ↓
-Review Data Summary
-       ↓
-Select Business Metric
-       ↓
-Generate KPI Analysis
-       ↓
-Discover Opportunities
-       ↓
-Generate Forecasts
-       ↓
-Execute Multi-Agent Analysis
-       ↓
-Conduct Strategic Debate
-       ↓
-Store Enterprise Memory
-       ↓
-Generate Organizational Learning
-       ↓
-Receive Executive Recommendation
-```
-
----
 
 # 📸 Application Screenshots
 
@@ -514,6 +526,30 @@ High-level dataset statistics including records, columns, and data quality indic
 
 ---
 
+## Enterprise Health Score Engine
+
+![Enterprise Health Score Engine](screenshots/enterprise-health-score-engine.png)
+
+Comprehensive enterprise-wide health assessment across financial, growth, risk, revenue, and operational dimensions.
+
+---
+
+## Enterprise Health Diagnostics
+
+![Enterprise Health Diagnostics](screenshots/enterprise-health-diagnostics.png)
+
+Automated identification of organizational strengths, weaknesses, and strategic improvement opportunities.
+
+---
+
+## Digital CEO Health Recommendation
+
+![Digital CEO Health Recommendation](screenshots/digital-ceo-health-recommendation.png)
+
+Executive-level strategic recommendation generated from the Enterprise Health Score Engine.
+
+---
+
 ## Strategic Decision Score
 
 ![Strategic Decision Score](screenshots/strategic-decision-score.png)
@@ -526,7 +562,7 @@ Decision Intelligence Engine output showing strategic score and classification.
 
 ![Opportunity Discovery Engine](screenshots/opportunity-discovery-engine.png)
 
-Automatically identifies business growth opportunities and improvement areas.
+Automatically identifies business growth opportunities and performance improvement areas.
 
 ---
 
@@ -534,7 +570,7 @@ Automatically identifies business growth opportunities and improvement areas.
 
 ![Forecasting Agent](screenshots/forecasting-agent.png)
 
-Future business performance projections.
+Future business performance projections generated by the forecasting engine.
 
 ---
 
@@ -542,7 +578,39 @@ Future business performance projections.
 
 ![Forecast Trend Analysis](screenshots/forecast-trend-analysis.png)
 
-Visualization of forecasted business trends.
+Visualization of forecasted business performance trends.
+
+---
+
+## Strategic Shock Simulator
+
+![Strategic Shock Simulator](screenshots/strategic-shock-simulator.png)
+
+Simulation of disruptive business events with executive-level response generation.
+
+---
+
+## AI Executive Voting System
+
+![AI Executive Voting System](screenshots/ai-executive-voting-system.png)
+
+Board-level voting simulation showing approval decisions, confidence scores, and executive reasoning.
+
+---
+
+## Enterprise Time Machine
+
+![Enterprise Time Machine](screenshots/enterprise-time-machine.png)
+
+Future scenario simulation and predictive decision intelligence capabilities.
+
+---
+
+## AI Competitor Twin
+
+![AI Competitor Twin](screenshots/ai-competitor-twin.png)
+
+Competitive threat simulation with strategic response recommendations and market pressure analysis.
 
 ---
 
@@ -596,32 +664,42 @@ Final executive recommendation generated by the Cognitive Enterprise Twin.
 
 # 🛠️ Technology Stack
 
-### Programming Language
+## Programming Language
 
 * Python
 
-### Framework
+## Framework
 
 * Streamlit
 
-### Data Processing
+## Data Processing
 
 * Pandas
 * NumPy
 
-### Visualization
+## Data Visualization
 
 * Plotly
 
-### Data Import
+## Data Import
 
 * OpenPyXL
 
-### Deployment
+## AI Components
+
+* Multi-Agent Decision Framework
+* Executive Boardroom Simulation
+* Strategic Debate Engine
+* Enterprise Memory Engine
+* Executive Voting Engine
+* Competitor Intelligence Engine
+* Scenario Simulation Engine
+
+## Deployment
 
 * Streamlit Community Cloud
 
-### Version Control
+## Version Control
 
 * Git
 * GitHub
@@ -639,11 +717,20 @@ cognitive-enterprise-twin/
 ├── opportunity_engine.py
 ├── decision_engine.py
 ├── memory_engine.py
+├── health_score_engine.py
+├── shock_simulator.py
+├── executive_voting_engine.py
+├── enterprise_time_machine.py
+├── competitor_twin.py
+├── boardroom_agents.py
+├── llm_engine.py
 ├── requirements.txt
 │
 ├── ARCHITECTURE.md
 ├── PRODUCT_VISION.md
 ├── ROADMAP.md
+│
+├── screenshots/
 │
 └── README.md
 ```
@@ -652,45 +739,57 @@ cognitive-enterprise-twin/
 
 # 🔮 Future Development Roadmap
 
+The Cognitive Enterprise Twin is being developed as a long-term enterprise decision intelligence platform.
+
 Planned enhancements include:
 
-### Scenario Simulation Engine
+## Autonomous Board Meetings
 
-Evaluate:
-
-* Revenue growth scenarios
-* Cost reduction scenarios
-* Strategic alternatives
+Enable executive agents to automatically debate and generate consensus recommendations without manual intervention.
 
 ---
 
-### Automatic KPI Discovery
+## Enterprise Strategy Copilot
+
+Provide real-time strategic guidance through conversational AI interactions.
+
+---
+
+## Dynamic KPI Discovery
 
 Automatically identify:
 
-* Revenue
-* Cost
-* Profit
-* Margin
+* Revenue metrics
+* Cost metrics
+* Profit metrics
+* Margin metrics
 * Customer metrics
+
+without requiring manual selection.
 
 ---
 
-### Advanced Forecasting
+## Advanced Forecasting
 
 Introduce:
 
 * Time-series forecasting
-* Trend analysis
-* Predictive modeling
+* Trend modelling
+* Scenario forecasting
+* Predictive analytics
 
 ---
 
-### Cognitive Enterprise Twin Evolution
+## Enterprise Digital Twin Expansion
 
-Long-term goal:
+Future versions aim to simulate:
 
-A continuously learning digital strategic advisor capable of supporting organizational planning, risk management, and growth optimization.
+* Organizational behaviour
+* Competitive ecosystems
+* Market dynamics
+* Strategic planning environments
+
+creating a continuously learning enterprise intelligence platform.
 
 ---
 
@@ -701,11 +800,35 @@ The platform may be useful for:
 * SMEs
 * Business managers
 * Strategy teams
+* Executive leadership teams
 * Sales leaders
 * Operations managers
 * Business analysts
+* Data analysts
 * Researchers
 * Decision-support practitioners
+* AI strategy consultants
+
+---
+
+# 🚀 Research Contribution
+
+The Cognitive Enterprise Twin demonstrates how multiple AI agents can be combined into a unified decision intelligence architecture capable of supporting strategic business decisions.
+
+The project explores concepts including:
+
+* Multi-Agent Systems
+* Decision Intelligence
+* Business Analytics
+* Executive Decision Support
+* Enterprise Memory
+* Organizational Learning
+* Competitive Intelligence
+* Scenario Simulation
+* Digital Twins
+* Explainable AI
+
+The platform aligns closely with emerging research in AI-driven strategic decision support systems and enterprise intelligence architectures.
 
 ---
 
@@ -717,10 +840,14 @@ This project is provided for educational, research, and innovation purposes.
 
 # 👨‍💻 Author
 
-Kamran Khan
+**Kamran Khan**
 
 GitHub:
 https://github.com/kamranafridi9220-prog
 
 Project:
-Cognitive Enterprise Twin – A Multi-Agent Decision Intelligence Platform for SMEs
+**Cognitive Enterprise Twin – A Multi-Agent Decision Intelligence Platform for SMEs**
+
+---
+
+### ⭐ If you found this project interesting, consider starring the repository and following future development updates.
