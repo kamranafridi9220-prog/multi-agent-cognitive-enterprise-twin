@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from health_score_engine import EnterpriseHealthScoreEngine
 
 from agents import (
     DataScientistAgent,
@@ -63,6 +64,51 @@ if uploaded_file:
     col1.metric("Total Records", df.shape[0])
     col2.metric("Total Columns", df.shape[1])
     col3.metric("Missing Values", int(df.isnull().sum().sum()))
+
+    st.subheader("Enterprise Health Score Engine")
+
+    health_engine = EnterpriseHealthScoreEngine(df)
+    health_result = health_engine.calculate_health_score()
+
+    h_col1, h_col2, h_col3 = st.columns(3)
+
+    h_col1.metric(
+        "Enterprise Health Score",
+        f"{health_result['overall_score']}/100"
+    )
+
+    h_col2.metric(
+        "Enterprise Status",
+        health_result["status"]
+    )
+
+    h_col3.metric(
+        "Decision Priority",
+        "Strategic Review"
+    )
+
+    st.progress(health_result["overall_score"] / 100)
+
+    st.markdown("### Health Dimensions")
+
+    hd1, hd2, hd3, hd4, hd5 = st.columns(5)
+
+    hd1.metric("Financial", f"{health_result['financial_health']}/100")
+    hd2.metric("Revenue", f"{health_result['revenue_health']}/100")
+    hd3.metric("Growth", f"{health_result['growth_health']}/100")
+    hd4.metric("Risk", f"{health_result['risk_health']}/100")
+    hd5.metric("Operational", f"{health_result['operational_health']}/100")
+
+    st.markdown("### Strengths Detected")
+    for strength in health_result["strengths"]:
+        st.success(strength)
+
+    st.markdown("### Weaknesses Detected")
+    for weakness in health_result["weaknesses"]:
+        st.warning(weakness)
+
+    st.markdown("### Digital CEO Health Recommendation")
+    st.info(health_result["recommendation"])
 
     numeric_columns = df.select_dtypes(include=["int64", "float64"]).columns.tolist()
 
