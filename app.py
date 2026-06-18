@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+
 from health_score_engine import EnterpriseHealthScoreEngine
 from shock_simulator import StrategicShockSimulator
 from executive_voting_engine import ExecutiveVotingEngine
@@ -29,6 +30,7 @@ from boardroom_agents import (
     ChiefRiskOfficerBoardAgent,
     BoardroomChairAgent
 )
+
 
 st.set_page_config(
     page_title="Cognitive Enterprise Twin",
@@ -76,20 +78,9 @@ if uploaded_file:
 
     h_col1, h_col2, h_col3 = st.columns(3)
 
-    h_col1.metric(
-        "Enterprise Health Score",
-        f"{health_result['overall_score']}/100"
-    )
-
-    h_col2.metric(
-        "Enterprise Status",
-        health_result["status"]
-    )
-
-    h_col3.metric(
-        "Decision Priority",
-        "Strategic Review"
-    )
+    h_col1.metric("Enterprise Health Score", f"{health_result['overall_score']}/100")
+    h_col2.metric("Enterprise Status", health_result["status"])
+    h_col3.metric("Decision Priority", "Strategic Review")
 
     st.progress(health_result["overall_score"] / 100)
 
@@ -135,6 +126,7 @@ if uploaded_file:
         c3.metric(f"Highest {selected_metric}", round(max_value, 2))
 
         st.subheader("Metric Distribution")
+
         fig = px.histogram(
             df,
             x=selected_metric,
@@ -287,6 +279,7 @@ if uploaded_file:
         )
 
         st.plotly_chart(forecast_fig, use_container_width=True)
+
         st.subheader("Strategic Shock Simulator")
 
         st.markdown("""
@@ -339,6 +332,7 @@ if uploaded_file:
 
         st.markdown("### Digital CEO Shock Decision")
         st.success(shock_result["ceo_response"])
+
         st.subheader("AI Executive Voting System")
 
         st.markdown("""
@@ -381,7 +375,8 @@ if uploaded_file:
             st.warning(voting_result["final_result"])
         else:
             st.error(voting_result["final_result"])
-            st.subheader("Enterprise Time Machine")
+
+        st.subheader("Enterprise Time Machine")
 
         st.markdown("""
         The Enterprise Time Machine simulates future business outcomes based on strategic what-if scenarios.
@@ -424,6 +419,7 @@ if uploaded_file:
 
         st.markdown("### Time Machine Recommendation")
         st.info(future_result["recommendation"])
+
         st.subheader("AI Competitor Twin")
 
         st.markdown("""
@@ -472,6 +468,155 @@ if uploaded_file:
 
         st.markdown("### Recommended Strategic Response")
         st.success(competitor_result["recommended_response"])
+
+        st.subheader("Strategic Growth Navigator")
+
+        st.markdown("""
+        The Strategic Growth Navigator converts enterprise intelligence into a practical strategic roadmap.
+        It gives SME leaders a 30-day, 90-day, and 12-month action plan based on the selected growth objective.
+        """)
+
+        growth_goal = st.selectbox(
+            "Select Strategic Growth Goal",
+            [
+                "Revenue Growth",
+                "Market Expansion",
+                "Cost Reduction",
+                "Customer Retention",
+                "Digital Transformation",
+                "Product Innovation"
+            ]
+        )
+
+        growth_roadmaps = {
+            "Revenue Growth": {
+                "30-Day Plan": [
+                    "Identify highest-value customers",
+                    "Review underperforming revenue segments",
+                    "Launch quick upsell opportunities"
+                ],
+                "90-Day Plan": [
+                    "Introduce tiered pricing",
+                    "Build customer segmentation",
+                    "Improve sales conversion process"
+                ],
+                "12-Month Plan": [
+                    "Develop recurring revenue streams",
+                    "Expand into new profitable segments",
+                    "Build strategic partnerships"
+                ]
+            },
+            "Market Expansion": {
+                "30-Day Plan": [
+                    "Research target markets",
+                    "Analyse competitor activity",
+                    "Identify demand signals"
+                ],
+                "90-Day Plan": [
+                    "Launch pilot campaigns",
+                    "Test regional demand",
+                    "Develop market entry partnerships"
+                ],
+                "12-Month Plan": [
+                    "Enter new market segments",
+                    "Scale acquisition channels",
+                    "Build stronger market presence"
+                ]
+            },
+            "Cost Reduction": {
+                "30-Day Plan": [
+                    "Review major cost drivers",
+                    "Identify operational inefficiencies",
+                    "Assess supplier contracts"
+                ],
+                "90-Day Plan": [
+                    "Automate repetitive processes",
+                    "Reduce waste and duplication",
+                    "Improve procurement control"
+                ],
+                "12-Month Plan": [
+                    "Build cost-efficient workflows",
+                    "Strengthen operational discipline",
+                    "Create continuous improvement systems"
+                ]
+            },
+            "Customer Retention": {
+                "30-Day Plan": [
+                    "Identify churn indicators",
+                    "Review customer feedback",
+                    "Improve customer support response"
+                ],
+                "90-Day Plan": [
+                    "Launch loyalty initiatives",
+                    "Improve customer engagement",
+                    "Create retention campaigns"
+                ],
+                "12-Month Plan": [
+                    "Build long-term retention framework",
+                    "Strengthen brand loyalty",
+                    "Develop customer success processes"
+                ]
+            },
+            "Digital Transformation": {
+                "30-Day Plan": [
+                    "Assess digital maturity",
+                    "Identify manual processes",
+                    "Prioritise automation opportunities"
+                ],
+                "90-Day Plan": [
+                    "Implement AI-supported workflows",
+                    "Improve data infrastructure",
+                    "Strengthen analytics capability"
+                ],
+                "12-Month Plan": [
+                    "Build enterprise-wide automation",
+                    "Create AI-enabled decision systems",
+                    "Develop a digital operating model"
+                ]
+            },
+            "Product Innovation": {
+                "30-Day Plan": [
+                    "Identify customer pain points",
+                    "Research new product opportunities",
+                    "Review competitor offerings"
+                ],
+                "90-Day Plan": [
+                    "Develop prototype concepts",
+                    "Test product-market fit",
+                    "Collect early customer feedback"
+                ],
+                "12-Month Plan": [
+                    "Launch new product lines",
+                    "Expand the product portfolio",
+                    "Create competitive differentiation"
+                ]
+            }
+        }
+
+        selected_roadmap = growth_roadmaps[growth_goal]
+
+        g1, g2, g3 = st.columns(3)
+
+        with g1:
+            st.markdown("### 30-Day Plan")
+            for action in selected_roadmap["30-Day Plan"]:
+                st.success(action)
+
+        with g2:
+            st.markdown("### 90-Day Plan")
+            for action in selected_roadmap["90-Day Plan"]:
+                st.info(action)
+
+        with g3:
+            st.markdown("### 12-Month Plan")
+            for action in selected_roadmap["12-Month Plan"]:
+                st.warning(action)
+
+        st.markdown("### Strategic Navigator Recommendation")
+        st.success(
+            f"The enterprise should prioritise '{growth_goal}' using a phased roadmap: immediate actions in 30 days, structured execution in 90 days, and strategic transformation over 12 months."
+        )
+
         st.subheader("Multi-Agent AI Intelligence Workflow")
 
         with st.expander("Data Scientist Agent", expanded=True):
