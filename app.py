@@ -759,6 +759,137 @@ if uploaded_file:
         st.success(
             f"The Digital CEO recommends prioritising {best_investment['Initiative']} because it has the highest expected ROI of {best_investment['Expected ROI (%)']}%, while still requiring risk-aware implementation."
         )
+                st.subheader("Autonomous Executive Meeting Generator")
+
+        st.markdown("""
+        The Autonomous Executive Meeting Generator converts enterprise intelligence,
+        boardroom analysis, strategic decisions, investment recommendations,
+        and future scenarios into executive meeting minutes and action plans.
+        """)
+
+        meeting_date = pd.Timestamp.today().strftime("%d %B %Y")
+
+        st.markdown("### Executive Meeting Details")
+
+        m1, m2 = st.columns(2)
+
+        with m1:
+            st.metric("Meeting Date", meeting_date)
+
+        with m2:
+            st.metric("Decision Score", f"{decision_score}/100")
+
+        strategic_priority = growth_goal
+        investment_priority = best_investment["Initiative"]
+
+        st.markdown("### Executive Meeting Minutes")
+
+        meeting_minutes = f"""
+Meeting Purpose:
+Review enterprise performance, strategic opportunities, investment priorities,
+and future growth initiatives.
+
+Enterprise Status:
+{health_result['status']}
+
+Decision Classification:
+{decision_classification}
+
+Strategic Priority:
+{strategic_priority}
+
+Investment Priority:
+{investment_priority}
+
+Board Vote Result:
+{voting_result['final_result']}
+
+Future Planning:
+Review forecast results, competitor threats, and growth opportunities.
+
+Conclusion:
+The executive board supports continued strategic execution with risk-aware decision making.
+"""
+
+        st.text_area(
+            "Generated Meeting Minutes",
+            value=meeting_minutes,
+            height=300
+        )
+
+        st.markdown("### Executive Action Plan")
+
+        action_plan_df = pd.DataFrame({
+            "Action Owner": [
+                "CEO",
+                "CFO",
+                "CMO",
+                "COO",
+                "CRO"
+            ],
+            "Strategic Action": [
+                f"Execute {strategic_priority} roadmap",
+                f"Review funding for {investment_priority}",
+                "Improve customer acquisition initiatives",
+                "Improve operational efficiency",
+                "Monitor strategic and operational risks"
+            ],
+            "Priority": [
+                "High",
+                "High",
+                "Medium",
+                "Medium",
+                "High"
+            ],
+            "Deadline": [
+                "30 Days",
+                "30 Days",
+                "60 Days",
+                "60 Days",
+                "90 Days"
+            ]
+        })
+
+        st.dataframe(action_plan_df, use_container_width=True)
+
+        st.markdown("### Executive Follow-Up Actions")
+
+        st.success(
+            f"CEO: Lead execution of the {strategic_priority} strategic roadmap."
+        )
+
+        st.success(
+            f"CFO: Evaluate capital allocation for {investment_priority}."
+        )
+
+        st.success(
+            "CMO: Develop customer growth and retention initiatives."
+        )
+
+        st.success(
+            "COO: Improve operational performance and process efficiency."
+        )
+
+        st.success(
+            "CRO: Monitor emerging strategic, market, and financial risks."
+        )
+
+        st.markdown("### Boardroom Resolution")
+
+        st.info(
+            f"""
+The Executive Board has reviewed enterprise performance, strategic priorities,
+investment recommendations, competitor intelligence, future simulations,
+and risk assessments.
+
+Resolution:
+Proceed with strategic execution focused on '{strategic_priority}'
+while prioritising investment in '{investment_priority}'.
+
+Decision Status:
+{voting_result['final_result']}
+"""
+        )
         st.subheader("Multi-Agent AI Intelligence Workflow")
 
         with st.expander("Data Scientist Agent", expanded=True):
