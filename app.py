@@ -759,7 +759,7 @@ if uploaded_file:
         st.success(
             f"The Digital CEO recommends prioritising {best_investment['Initiative']} because it has the highest expected ROI of {best_investment['Expected ROI (%)']}%, while still requiring risk-aware implementation."
         )
-                st.subheader("Autonomous Executive Meeting Generator")
+        st.subheader("Autonomous Executive Meeting Generator")
 
         st.markdown("""
         The Autonomous Executive Meeting Generator converts enterprise intelligence,
