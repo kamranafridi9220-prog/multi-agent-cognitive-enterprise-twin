@@ -617,7 +617,7 @@ if uploaded_file:
             f"The enterprise should prioritise '{growth_goal}' using a phased roadmap: immediate actions in 30 days, structured execution in 90 days, and strategic transformation over 12 months."
         )
 
-                st.subheader("AI Investment Advisor & Capital Allocation Engine")
+        st.subheader("AI Investment Advisor & Capital Allocation Engine")
 
         st.markdown("""
         The AI Investment Advisor helps SME leaders compare strategic investment options,
