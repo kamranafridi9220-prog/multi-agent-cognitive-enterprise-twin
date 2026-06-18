@@ -617,6 +617,148 @@ if uploaded_file:
             f"The enterprise should prioritise '{growth_goal}' using a phased roadmap: immediate actions in 30 days, structured execution in 90 days, and strategic transformation over 12 months."
         )
 
+                st.subheader("AI Investment Advisor & Capital Allocation Engine")
+
+        st.markdown("""
+        The AI Investment Advisor helps SME leaders compare strategic investment options,
+        estimate expected return, assess risk, and decide where capital should be allocated first.
+        """)
+
+        investment_options = [
+            "Marketing Expansion",
+            "Product Development",
+            "Sales Team Expansion",
+            "AI Transformation",
+            "Operational Efficiency",
+            "Customer Retention Program"
+        ]
+
+        selected_investment = st.selectbox(
+            "Select Strategic Investment Option",
+            investment_options
+        )
+
+        investment_profiles = {
+            "Marketing Expansion": {
+                "investment_ratio": 0.04,
+                "expected_roi": 24,
+                "payback": "6-9 months",
+                "risk": "Medium",
+                "reason": "Marketing investment can increase demand generation, brand reach, and customer acquisition, but performance depends on campaign execution and conversion quality."
+            },
+            "Product Development": {
+                "investment_ratio": 0.06,
+                "expected_roi": 30,
+                "payback": "9-12 months",
+                "risk": "Medium-High",
+                "reason": "Product development can create long-term differentiation, but requires validation, development discipline, and market adoption."
+            },
+            "Sales Team Expansion": {
+                "investment_ratio": 0.05,
+                "expected_roi": 28,
+                "payback": "6-12 months",
+                "risk": "Medium",
+                "reason": "Sales expansion can improve pipeline coverage and revenue conversion, but depends on hiring quality, training, and market demand."
+            },
+            "AI Transformation": {
+                "investment_ratio": 0.07,
+                "expected_roi": 38,
+                "payback": "12-18 months",
+                "risk": "Medium",
+                "reason": "AI transformation can improve decision speed, automation, forecasting, and operational intelligence, creating scalable long-term value."
+            },
+            "Operational Efficiency": {
+                "investment_ratio": 0.035,
+                "expected_roi": 22,
+                "payback": "3-6 months",
+                "risk": "Low",
+                "reason": "Operational efficiency investment can reduce waste, improve productivity, and protect margins with relatively lower implementation risk."
+            },
+            "Customer Retention Program": {
+                "investment_ratio": 0.03,
+                "expected_roi": 26,
+                "payback": "4-8 months",
+                "risk": "Low-Medium",
+                "reason": "Retention investment can protect existing revenue, reduce churn, and increase customer lifetime value."
+            }
+        }
+
+        selected_profile = investment_profiles[selected_investment]
+
+        recommended_investment = total_value * selected_profile["investment_ratio"]
+        expected_return = recommended_investment * (selected_profile["expected_roi"] / 100)
+        total_projected_value = recommended_investment + expected_return
+
+        ia1, ia2, ia3, ia4 = st.columns(4)
+
+        ia1.metric("Recommended Investment", f"£{round(recommended_investment, 2)}")
+        ia2.metric("Expected ROI", f"{selected_profile['expected_roi']}%")
+        ia3.metric("Expected Return", f"£{round(expected_return, 2)}")
+        ia4.metric("Payback Period", selected_profile["payback"])
+
+        st.markdown("### Investment Risk Assessment")
+
+        if selected_profile["risk"] == "Low":
+            st.success(f"Risk Rating: {selected_profile['risk']}")
+        elif selected_profile["risk"] in ["Low-Medium", "Medium"]:
+            st.warning(f"Risk Rating: {selected_profile['risk']}")
+        else:
+            st.error(f"Risk Rating: {selected_profile['risk']}")
+
+        st.markdown("### Investment Rationale")
+        st.info(selected_profile["reason"])
+
+        st.markdown("### Capital Allocation Recommendation")
+
+        if selected_profile["expected_roi"] >= 35 and selected_profile["risk"] != "Medium-High":
+            investment_decision = "Strongly Recommended"
+            decision_message = "This investment shows strong expected return with an acceptable risk profile. It should be prioritised for strategic capital allocation."
+            st.success(investment_decision)
+        elif selected_profile["expected_roi"] >= 25:
+            investment_decision = "Recommended with Monitoring"
+            decision_message = "This investment has attractive return potential but should be monitored closely against execution risk and performance milestones."
+            st.warning(investment_decision)
+        else:
+            investment_decision = "Selective Investment"
+            decision_message = "This investment may be useful, but capital should be allocated carefully and only after higher-return opportunities are reviewed."
+            st.info(investment_decision)
+
+        st.write(decision_message)
+
+        investment_comparison_df = pd.DataFrame([
+            {
+                "Initiative": option,
+                "Recommended Investment": round(total_value * profile["investment_ratio"], 2),
+                "Expected ROI (%)": profile["expected_roi"],
+                "Expected Return": round((total_value * profile["investment_ratio"]) * (profile["expected_roi"] / 100), 2),
+                "Risk Rating": profile["risk"],
+                "Payback Period": profile["payback"]
+            }
+            for option, profile in investment_profiles.items()
+        ])
+
+        st.markdown("### Investment Portfolio Comparison")
+        st.dataframe(investment_comparison_df, use_container_width=True)
+
+        roi_fig = px.bar(
+            investment_comparison_df,
+            x="Initiative",
+            y="Expected ROI (%)",
+            title="Expected ROI by Strategic Investment Option"
+        )
+
+        st.plotly_chart(roi_fig, use_container_width=True)
+
+        st.markdown("### Digital CEO Investment Recommendation")
+
+        best_investment = investment_comparison_df.sort_values(
+            by="Expected ROI (%)",
+            ascending=False
+        ).iloc[0]
+
+        st.success(
+            f"The Digital CEO recommends prioritising {best_investment['Initiative']} because it has the highest expected ROI of {best_investment['Expected ROI (%)']}%, while still requiring risk-aware implementation."
+        )
         st.subheader("Multi-Agent AI Intelligence Workflow")
 
         with st.expander("Data Scientist Agent", expanded=True):
