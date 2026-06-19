@@ -37,6 +37,104 @@ st.set_page_config(
     page_icon="🧠",
     layout="wide"
 )
+# =====================================================
+# CUSTOM EXECUTIVE UI THEME
+# =====================================================
+
+st.markdown("""
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+}
+
+.stApp {
+    background: linear-gradient(135deg, #0F172A 0%, #111827 45%, #1E293B 100%);
+    color: #F8FAFC;
+}
+
+section[data-testid="stSidebar"] {
+    background-color: #020617;
+    border-right: 1px solid #334155;
+}
+
+h1 {
+    font-size: 3rem !important;
+    font-weight: 800 !important;
+    color: #F8FAFC !important;
+    letter-spacing: -1px;
+}
+
+h2, h3 {
+    color: #E2E8F0 !important;
+    font-weight: 700 !important;
+}
+
+p, label, span, div {
+    color: #E5E7EB;
+}
+
+[data-testid="stMetric"] {
+    background: linear-gradient(145deg, #111827, #1E293B);
+    border: 1px solid #334155;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+[data-testid="stMetricLabel"] {
+    color: #94A3B8 !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: #38BDF8 !important;
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
+}
+
+.stButton > button {
+    background: linear-gradient(90deg, #06B6D4, #2563EB);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0.7rem 1.2rem;
+    font-weight: 700;
+}
+
+.stButton > button:hover {
+    background: linear-gradient(90deg, #0891B2, #1D4ED8);
+    color: white;
+}
+
+[data-testid="stExpander"] {
+    background-color: #111827;
+    border: 1px solid #334155;
+    border-radius: 16px;
+}
+
+.stDataFrame {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+div[data-testid="stAlert"] {
+    border-radius: 14px;
+    border: 1px solid #334155;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: #334155;
+    margin: 2rem 0;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 st.title("🧠 Cognitive Enterprise Twin")
 st.subheader("A Multi-Agent AI Decision Intelligence Platform for SMEs")
