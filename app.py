@@ -404,7 +404,7 @@ if uploaded_file:
     col2.metric("Total Columns", df.shape[1])
     col3.metric("Missing Values", int(df.isnull().sum().sum()))
 
-        # =====================================================
+    # =====================================================
     # ENTERPRISE MISSION CONTROL DASHBOARD
     # =====================================================
 
@@ -469,7 +469,7 @@ if uploaded_file:
         <div class="alert-row warning">Strategic agents awaiting metric selection for deeper analysis.</div>
     </div>
     """, unsafe_allow_html=True)
-        st.markdown("""
+    st.markdown("""
     <div class="agent-timeline">
         <div class="timeline-title">AI Agent Activity Timeline</div>
 
