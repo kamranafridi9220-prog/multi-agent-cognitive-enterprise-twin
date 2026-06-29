@@ -297,6 +297,64 @@ hr {
     color: #FDE68A !important;
     border: 1px solid rgba(245, 158, 11, 0.22);
 }
+.agent-timeline {
+    margin-top: 24px;
+    padding: 26px;
+    border-radius: 24px;
+    background:
+        linear-gradient(145deg, rgba(15, 23, 42, 0.94), rgba(30, 41, 59, 0.88));
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.34);
+}
+
+.timeline-title {
+    color: #F8FAFC !important;
+    font-size: 1.2rem;
+    font-weight: 850;
+    margin-bottom: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+}
+
+.timeline-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin-top: 6px;
+    box-shadow: 0 0 18px rgba(94, 234, 212, 0.65);
+}
+
+.timeline-dot.active {
+    background: #5EEAD4;
+}
+
+.timeline-dot.warning {
+    background: #FBBF24;
+    box-shadow: 0 0 18px rgba(251, 191, 36, 0.65);
+}
+
+.timeline-agent {
+    color: #E2E8F0 !important;
+    font-size: 0.98rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.timeline-text {
+    color: #CBD5E1 !important;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -409,6 +467,51 @@ if uploaded_file:
         <div class="alert-row good">Dataset successfully connected to the Cognitive Enterprise Twin OS.</div>
         <div class="alert-row info">Enterprise health engine is ready for diagnostic scoring.</div>
         <div class="alert-row warning">Strategic agents awaiting metric selection for deeper analysis.</div>
+    </div>
+    """, unsafe_allow_html=True)
+        st.markdown("""
+    <div class="agent-timeline">
+        <div class="timeline-title">AI Agent Activity Timeline</div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot active"></div>
+            <div>
+                <div class="timeline-agent">Data Intelligence Layer</div>
+                <div class="timeline-text">Dataset connected and prepared for enterprise analysis.</div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot active"></div>
+            <div>
+                <div class="timeline-agent">Enterprise Health Engine</div>
+                <div class="timeline-text">Diagnostic scoring activated across financial, revenue, growth, risk, and operational dimensions.</div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot active"></div>
+            <div>
+                <div class="timeline-agent">Revenue Optimization Agent</div>
+                <div class="timeline-text">Ready to identify high-value opportunities and revenue improvement patterns.</div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot warning"></div>
+            <div>
+                <div class="timeline-agent">Risk Officer Agent</div>
+                <div class="timeline-text">Monitoring data quality, volatility, missing values, and potential strategic exposure.</div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot active"></div>
+            <div>
+                <div class="timeline-agent">AI Executive Boardroom</div>
+                <div class="timeline-text">CFO, CMO, COO, CRO, and Digital CEO agents standing by for strategic review.</div>
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
     st.subheader("Enterprise Health Score Engine")
