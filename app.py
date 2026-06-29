@@ -471,51 +471,51 @@ if uploaded_file:
     </div>
     """), unsafe_allow_html=True)
 
-    st.markdown(dedent("""
-    <div class="agent-timeline">
-        <div class="timeline-title">AI Agent Activity Timeline</div>
+st.markdown("""
+<div class="agent-timeline">
+    <div class="timeline-title">AI Agent Activity Timeline</div>
 
-        <div class="timeline-item">
-            <div class="timeline-dot active"></div>
-            <div>
-                <div class="timeline-agent">Data Intelligence Layer</div>
-                <div class="timeline-text">Dataset connected and prepared for enterprise analysis.</div>
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="timeline-dot active"></div>
-            <div>
-                <div class="timeline-agent">Enterprise Health Engine</div>
-                <div class="timeline-text">Diagnostic scoring activated across financial, revenue, growth, risk, and operational dimensions.</div>
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="timeline-dot active"></div>
-            <div>
-                <div class="timeline-agent">Revenue Optimization Agent</div>
-                <div class="timeline-text">Ready to identify high-value opportunities and revenue improvement patterns.</div>
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="timeline-dot warning"></div>
-            <div>
-                <div class="timeline-agent">Risk Officer Agent</div>
-                <div class="timeline-text">Monitoring data quality, volatility, missing values, and potential strategic exposure.</div>
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="timeline-dot active"></div>
-            <div>
-                <div class="timeline-agent">AI Executive Boardroom</div>
-                <div class="timeline-text">CFO, CMO, COO, CRO, and Digital CEO agents standing by for strategic review.</div>
-            </div>
+    <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div>
+            <div class="timeline-agent">Data Intelligence Layer</div>
+            <div class="timeline-text">Dataset connected and prepared for enterprise analysis.</div>
         </div>
     </div>
-    """), unsafe_allow_html=True)
+
+    <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div>
+            <div class="timeline-agent">Enterprise Health Engine</div>
+            <div class="timeline-text">Diagnostic scoring activated across financial, revenue, growth, risk, and operational dimensions.</div>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div>
+            <div class="timeline-agent">Revenue Optimization Agent</div>
+            <div class="timeline-text">Ready to identify high-value opportunities and revenue improvement patterns.</div>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-dot warning"></div>
+        <div>
+            <div class="timeline-agent">Risk Officer Agent</div>
+            <div class="timeline-text">Monitoring data quality, volatility, missing values, and potential strategic exposure.</div>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div>
+            <div class="timeline-agent">AI Executive Boardroom</div>
+            <div class="timeline-text">CFO, CMO, COO, CRO, and Digital CEO agents standing by for strategic review.</div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
     st.subheader("Enterprise Health Score Engine")
 
