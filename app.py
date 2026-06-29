@@ -192,7 +192,111 @@ hr {
     font-weight: 700;
     box-shadow: 0 10px 28px rgba(0,0,0,0.28);
 }
+.mission-control {
+    padding: 26px 30px;
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.22), transparent 30%),
+        linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.96));
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.36);
+    margin-bottom: 24px;
+}
 
+.mission-label {
+    color: #5EEAD4 !important;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    margin-bottom: 8px;
+}
+
+.mission-title {
+    color: #F8FAFC !important;
+    font-size: 1.7rem;
+    font-weight: 850;
+    margin-bottom: 8px;
+}
+
+.mission-text {
+    color: #CBD5E1 !important;
+    max-width: 900px;
+    line-height: 1.7;
+}
+
+.mc-card {
+    padding: 24px;
+    border-radius: 22px;
+    background:
+        linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.92));
+    border: 1px solid rgba(148, 163, 184, 0.20);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    min-height: 150px;
+}
+
+.mc-label {
+    color: #94A3B8 !important;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.mc-value {
+    color: #5EEAD4 !important;
+    font-size: 2.35rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.mc-note {
+    color: #CBD5E1 !important;
+    font-size: 0.9rem;
+}
+
+.executive-alerts {
+    margin-top: 24px;
+    padding: 24px;
+    border-radius: 22px;
+    background: rgba(2, 6, 23, 0.64);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+}
+
+.alert-title {
+    color: #F8FAFC !important;
+    font-size: 1.1rem;
+    font-weight: 850;
+    margin-bottom: 14px;
+}
+
+.alert-row {
+    padding: 12px 14px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    font-size: 0.92rem;
+    font-weight: 650;
+}
+
+.alert-row.good {
+    background: rgba(16, 185, 129, 0.12);
+    color: #A7F3D0 !important;
+    border: 1px solid rgba(16, 185, 129, 0.22);
+}
+
+.alert-row.info {
+    background: rgba(59, 130, 246, 0.12);
+    color: #BFDBFE !important;
+    border: 1px solid rgba(59, 130, 246, 0.22);
+}
+
+.alert-row.warning {
+    background: rgba(245, 158, 11, 0.12);
+    color: #FDE68A !important;
+    border: 1px solid rgba(245, 158, 11, 0.22);
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -242,6 +346,71 @@ if uploaded_file:
     col2.metric("Total Columns", df.shape[1])
     col3.metric("Missing Values", int(df.isnull().sum().sum()))
 
+        # =====================================================
+    # ENTERPRISE MISSION CONTROL DASHBOARD
+    # =====================================================
+
+    st.markdown("## Enterprise Mission Control")
+
+    st.markdown("""
+    <div class="mission-control">
+        <div>
+            <div class="mission-label">COMMAND STATUS</div>
+            <div class="mission-title">Executive Intelligence Activated</div>
+            <div class="mission-text">
+                Dataset connected. Cognitive agents are analysing enterprise health,
+                strategic risk, growth potential, forecasting signals, and boardroom-level decisions.
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    mc1, mc2, mc3, mc4 = st.columns(4)
+
+    with mc1:
+        st.markdown("""
+        <div class="mc-card">
+            <div class="mc-label">Data Records</div>
+            <div class="mc-value">{}</div>
+            <div class="mc-note">Enterprise rows analysed</div>
+        </div>
+        """.format(df.shape[0]), unsafe_allow_html=True)
+
+    with mc2:
+        st.markdown("""
+        <div class="mc-card">
+            <div class="mc-label">Business Dimensions</div>
+            <div class="mc-value">{}</div>
+            <div class="mc-note">Dataset columns detected</div>
+        </div>
+        """.format(df.shape[1]), unsafe_allow_html=True)
+
+    with mc3:
+        st.markdown("""
+        <div class="mc-card">
+            <div class="mc-label">Data Quality</div>
+            <div class="mc-value">{}</div>
+            <div class="mc-note">Missing values found</div>
+        </div>
+        """.format(int(df.isnull().sum().sum())), unsafe_allow_html=True)
+
+    with mc4:
+        st.markdown("""
+        <div class="mc-card">
+            <div class="mc-label">AI Agents</div>
+            <div class="mc-value">18</div>
+            <div class="mc-note">Executive intelligence units</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="executive-alerts">
+        <div class="alert-title">Executive Signal Feed</div>
+        <div class="alert-row good">Dataset successfully connected to the Cognitive Enterprise Twin OS.</div>
+        <div class="alert-row info">Enterprise health engine is ready for diagnostic scoring.</div>
+        <div class="alert-row warning">Strategic agents awaiting metric selection for deeper analysis.</div>
+    </div>
+    """, unsafe_allow_html=True)
     st.subheader("Enterprise Health Score Engine")
 
     health_engine = EnterpriseHealthScoreEngine(df)
