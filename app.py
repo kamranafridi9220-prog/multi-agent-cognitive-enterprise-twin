@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from textwrap import dedent
 
 from health_score_engine import EnterpriseHealthScoreEngine
 from shock_simulator import StrategicShockSimulator
@@ -410,7 +411,7 @@ if uploaded_file:
 
     st.markdown("## Enterprise Mission Control")
 
-    st.markdown("""
+    st.markdown(dedent("""
     <div class="mission-control">
         <div>
             <div class="mission-label">COMMAND STATUS</div>
@@ -421,7 +422,7 @@ if uploaded_file:
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 
     mc1, mc2, mc3, mc4 = st.columns(4)
 
@@ -461,15 +462,16 @@ if uploaded_file:
         </div>
         """, unsafe_allow_html=True)
 
-    st.markdown("""
+    st.markdown(dedent("""
     <div class="executive-alerts">
         <div class="alert-title">Executive Signal Feed</div>
         <div class="alert-row good">Dataset successfully connected to the Cognitive Enterprise Twin OS.</div>
         <div class="alert-row info">Enterprise health engine is ready for diagnostic scoring.</div>
         <div class="alert-row warning">Strategic agents awaiting metric selection for deeper analysis.</div>
     </div>
-    """, unsafe_allow_html=True)
-    st.markdown("""
+    """), unsafe_allow_html=True)
+
+    st.markdown(dedent("""
     <div class="agent-timeline">
         <div class="timeline-title">AI Agent Activity Timeline</div>
 
@@ -513,7 +515,8 @@ if uploaded_file:
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
+
     st.subheader("Enterprise Health Score Engine")
 
     health_engine = EnterpriseHealthScoreEngine(df)
