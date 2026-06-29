@@ -133,15 +133,88 @@ hr {
     margin: 2rem 0;
 }
 
+.hero-container {
+    padding: 38px 42px;
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.26), transparent 35%),
+        radial-gradient(circle at top right, rgba(99, 102, 241, 0.22), transparent 32%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.92));
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    margin-bottom: 22px;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(20, 184, 166, 0.14);
+    color: #5EEAD4 !important;
+    border: 1px solid rgba(94, 234, 212, 0.28);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin-bottom: 16px;
+}
+
+.hero-title {
+    font-size: 3.4rem !important;
+    font-weight: 900 !important;
+    letter-spacing: -1.7px;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg, #F8FAFC, #A5B4FC, #5EEAD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    max-width: 980px;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #CBD5E1 !important;
+}
+
+.agent-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.agent-pill {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    color: #E2E8F0 !important;
+    font-size: 0.86rem;
+    font-weight: 700;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+}
+
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🧠 Cognitive Enterprise Twin")
-st.subheader("A Multi-Agent AI Decision Intelligence Platform for SMEs")
-
 st.markdown("""
-The Cognitive Enterprise Twin uses multiple executive-style AI agents to analyse SME business data, identify risks, discover revenue opportunities, store enterprise memory, forecast future performance, and generate AI-powered strategic recommendations.
-""")
+<div class="hero-container">
+    <div class="hero-badge">AI EXECUTIVE OPERATING SYSTEM</div>
+    <h1 class="hero-title">Cognitive Enterprise Twin OS</h1>
+    <p class="hero-subtitle">
+        A multi-agent strategic intelligence platform that simulates executive reasoning,
+        enterprise memory, risk assessment, future scenarios, investment decisions,
+        and boardroom-level recommendations for SMEs.
+    </p>
+</div>
+
+<div class="agent-strip">
+    <div class="agent-pill">Revenue Agent Active</div>
+    <div class="agent-pill">Risk Agent Active</div>
+    <div class="agent-pill">Forecast Agent Active</div>
+    <div class="agent-pill">CEO Advisor Online</div>
+    <div class="agent-pill">Boardroom Ready</div>
+</div>
+""", unsafe_allow_html=True)
 
 st.sidebar.title("CET Control Panel")
 st.sidebar.markdown("Upload a business dataset to activate the multi-agent AI decision intelligence workflow.")
